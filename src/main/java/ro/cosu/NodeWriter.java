@@ -7,9 +7,10 @@ import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 public interface NodeWriter {
-    static void write (ZooKeeper zooKeeper, String name) throws IOException, KeeperException, InterruptedException {
-        zooKeeper.create(name, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+    static void write (ZooKeeper zooKeeper, String node, String data) throws IOException, KeeperException, InterruptedException {
+        zooKeeper.create(node, data.getBytes(Charset.forName("UTF-8")), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
     }
 }

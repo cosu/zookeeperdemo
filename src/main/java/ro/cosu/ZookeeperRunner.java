@@ -70,8 +70,11 @@ public class ZookeeperRunner {
         SessionWatcher sessionWatcher = new SessionWatcher();
 
 
-        NodeReader.read(zooKeeperConnection.getZooKeeper(), "/foo", sessionWatcher);
-        NodeWriter.write(zooKeeperConnection.getZooKeeper(), "/foo");
+        NodeReader.exists(zooKeeperConnection.getZooKeeper(), "/foo", sessionWatcher);
+        NodeWriter.write(zooKeeperConnection.getZooKeeper(), "/foo", "bar");
+
+        String value = NodeReader.read(zooKeeperConnection.getZooKeeper(), "/foo");
+        LOGGER.info("read {}", value);
 
     }
 }
